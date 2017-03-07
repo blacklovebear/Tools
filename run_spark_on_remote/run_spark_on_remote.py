@@ -35,18 +35,17 @@ def get_jar_name(jar_path):
     return jar_name
 
 
-def main(spark_main_class, local_spark_jar_path):
-    remote_ip = "172.30.103.11"
+def main(remote_ip, spark_main_class, local_spark_jar_path):
     copy_spark_jar_to_remote(local_spark_jar_path, remote_ip)
     run_shell_command_on_remote(remote_ip, local_spark_jar_path, spark_main_class)
 
 
 if __name__ == "__main__":
-    if len(sys.argv) == 3:
-        main(sys.argv[1], sys.argv[2])
+    if len(sys.argv) == 4:
+        main(sys.argv[1], sys.argv[2], sys.argv[3])
     else:
-        print("Usage: python run_spark_on_remote.py spark_class local_jar_path")
-        print("eg: python run_spark_on_remote.py com.exmind.spark.UpdateMacHomeConsumeCycle e:/IdeaProjects/SparkProject/out/artifacts/SparkProject_jar/SparkProject.jar")
+        print("Usage: python run_spark_on_remote.py remote_ip spark_class local_jar_path")
+        print("eg: python run_spark_on_remote.py ip_address com.exmind.spark.UpdateMacHomeConsumeCycle e:/IdeaProjects/SparkProject/out/artifacts/SparkProject_jar/SparkProject.jar")
 
 
     
